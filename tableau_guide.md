@@ -93,5 +93,5 @@ Use dual-axis with a reference line at the control group value.
 
 1. File → Save to Tableau Public
 2. Sign in / create free account
-3. Name: `Shadow Realm Idle RPG Analytics`
+3. Name: `Shadow Realm MobileGame Analytics`
 4. Copy the public URL and add it to your README and LinkedIn

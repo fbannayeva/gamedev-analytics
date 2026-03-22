@@ -73,7 +73,7 @@ gamedev-analytics/
 - Tests whether `variant_a` significantly improves D1, D7, D30 retention
 - Includes relative uplift and statistical significance flag
 
-![A/B Test](assets/ab_test.png)
+![A/B Test](/ab_test.png)
 
 ### 4 · Payer Conversion Funnel
 - Install → D1 Active → D7 Active → D30 Active → Payer
@@ -156,5 +156,5 @@ See [`dashboard/tableau_guide.md`](dashboard/tableau_guide.md) for full instruct
 
 ## Author
 
-**[Fidan Bannayeva]** 
+**Fidan Bannayeva** 
 [LinkedIn](https://linkedin.com/in/fbannayeva) 
