@@ -1,97 +1,95 @@
 # Tableau Public Dashboard Guide
-## Shadow Realm: Analytics Dashboard
-
-This document describes how to build the 4-sheet interactive Tableau Public dashboard from the project CSVs.
+## Shadow Realm: MobileGame Player Analytics Dashboard
 
 ---
 
 ## Data Sources
 
-Connect all three CSVs as separate data sources. Create relationships:
-- `players.csv` ← join on `player_id` → `sessions.csv`
-- `players.csv` ← join on `player_id` → `purchases.csv`
+- Connect `players.csv` as the main data source
+- Connect `purchases.csv` as a second data source
+- Both files linked on `player_id`
 
 ---
 
-## Sheet 1 · KPI Overview (Text Table + Scorecards)
+## Sheet 1 · Retention Rates
 
-**Calculated Fields to create:**
+**Steps:**
+1. Drag `D1 Retained`, `D7 Retained`, `D30 Retained` to Rows
+2. Right-click each pill → Measure → Average
+3. Format Y axis → Numbers → Percentage → Decimal 1
+4. Drag `Ab Group` to Color in Marks card
+5. In Marks card click Label → Show Mark Labels
 
-```
-// D1 Retention Rate
-SUM([D1 Retained]) / COUNT([Player Id])
-
-// D7 Retention Rate
-SUM([D7 Retained]) / COUNT([Player Id])
-
-// D30 Retention Rate
-SUM([D30 Retained]) / COUNT([Player Id])
-
-// ARPU
-SUM([Amount Usd]) / COUNTD([Player Id])
-
-// Payer Conversion Rate
-SUM([Is Payer]) / COUNT([Player Id])
-```
-
-**Layout**: 5 BANs (big-ass numbers) in a horizontal row:
-- Total Players | D1 Ret % | D7 Ret % | ARPU | Payer CVR %
-
-**Filters**: Platform, Country, AB Group (all as dashboard-level filters)
+**Result:** Vertical bar chart showing D1 ~38%, D7 ~15%, D30 ~5%
 
 ---
 
-## Sheet 2 · Retention Cohort Heatmap
+## Sheet 2 · Revenue & ARPU by Country
 
-**Rows**: `DATETRUNC('week', [Install Date])` → formatted as `"Wk" + WEEK()`  
-**Columns**: `D1 Retained`, `D7 Retained`, `D30 Retained` (separate calculated fields as %)  
-**Mark type**: Square  
-**Color**: `AVG([D1 Retained])` — use diverging Red-Yellow-Green  
-**Label**: Show percentage on each cell  
+**Steps:**
+1. Drag `Country` to Columns
+2. Drag `Amount Usd` to Rows — keeps SUM
+3. Format Y axis → Numbers → Currency → USD
+4. Sort by descending revenue
 
-This creates a classic cohort retention grid.
+**Add ARPU calculated field:**
+- Analysis → Create Calculated Field
+- Name: `ARPU`
+- Formula: `SUM([Amount Usd]) / COUNT([Player Id])`
+- Drag `ARPU` to Rows next to SUM(Amount Usd)
 
----
-
-## Sheet 3 · Revenue Map
-
-**Mark type**: Map  
-**Rows/Cols**: Use built-in Latitude / Longitude (generated from Country)  
-**Size**: `SUM([Amount Usd])`  
-**Color**: `SUM([Amount Usd]) / COUNTD([Player Id])` (ARPU)  
-**Tooltip**: Country, Total Revenue, ARPU, # Payers  
+**Result:** Two bar charts side by side — Total Revenue and ARPU by country.
+US leads on revenue. DE, FR, CN, RU lead on ARPU.
 
 ---
 
-## Sheet 4 · A/B Test Bar Chart
+## Sheet 3 · A/B Test
 
-**Rows**: `AB Group`  
-**Columns**: 3 separate sheets side-by-side:
-  1. D1 Retention %
-  2. D7 Retention %
-  3. D30 Retention %
+**Steps:**
+1. Drag `Ab Group` to Columns
+2. Drag `Measure Names` to Columns next to Ab Group
+3. Drag `Measure Values` to Rows
+4. In Measure Values card keep only:
+   - AVG(D1 Retained)
+   - AVG(D7 Retained)
+   - AVG(D30 Retained)
+5. Move `Measure Names` to the left of `Ab Group` in Columns
+6. Drag `Ab Group` to Color in Marks card
+7. Format Y axis → Numbers → Percentage → Decimal 1
+8. Worksheet → Show Title → rename to `A/B Test — Onboarding Flow`
+9. Marks → Label → Show Mark Labels
 
-Use dual-axis with a reference line at the control group value.
-
-**Add annotation**: "★ Statistically significant (p < 0.05)" on the Variant A bars for D1 and D7.
+**Result:** Three pairs of bars — Control vs Variant A for D1, D7, D30.
+Variant A shows higher retention across all three metrics.
 
 ---
 
 ## Dashboard Assembly
 
-1. Create a new Dashboard (1400 × 900 px, fixed)
-2. Add a title text box: "Shadow Realm: Idle RPG — Player Analytics Dashboard"
-3. Top row: Sheet 1 (KPIs, full width)
-4. Middle row: Sheet 3 (map, left 50%) + Sheet 2 (cohort heatmap, right 50%)
-5. Bottom row: Sheet 4 (A/B test, full width)
-6. Add Platform + Country + AB Group as filter controls (top right)
-7. Apply filters to all sheets using "Apply to Worksheets → All Using This Data Source"
+1. Bottom panel click + → New Dashboard
+2. Size → Fixed → Desktop Browser (1000 x 800)
+3. Drag sheets onto canvas:
+   - Retention → top left
+   - Revenue → top right
+   - A/B Test → bottom full width
+4. Objects → Text → drag to top → add title:
+   `Shadow Realm: MobileGame Player Analytics Dashboard`
 
 ---
 
-## Publishing to Tableau Public
+## Publishing
 
-1. File → Save to Tableau Public
-2. Sign in / create free account
-3. Name: `Shadow Realm MobileGame Analytics`
-4. Copy the public URL and add it to your README and LinkedIn
+1. File → Save to Tableau Public As
+2. Name: `Shadow Realm MobileGame Analytics`
+3. Save → browser opens with your live dashboard
+4. Copy the URL and add it to README and LinkedIn
+
+**Live Dashboard:** [View on Tableau Public](https://public.tableau.com/app/profile/fidan.bannayeva/viz/MobileGamePlayerAnalyticsDashboard/Dashboard1?publish=yes)
+
+## License
+
+This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT).
+Feel free to use, modify, and distribute this work.
+
+**Author:** 
+Fidan Bannayeva — [LinkedIn](https://www.linkedin.com/in/fbannayeva)
