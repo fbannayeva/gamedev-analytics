@@ -59,14 +59,14 @@ gamedev-analytics/
 - D1 / D7 / D30 retention rates vs industry benchmarks
 - Weekly cohort heatmap to identify seasonal or product-driven changes
 
-![Retention](assets/retention.png)
+![Retention](/retention.png)
 
 ### 2 · Revenue & ARPU
 - Total revenue and ARPU broken down by country and platform
 - US leads on total revenue; DE, FR, CN, RU lead on ARPU per player
 - iOS vs Android monetisation comparison
 
-![Revenue](assets/revenue.png)
+![Revenue](/revenue.png)
 
 ### 3 · A/B Test — New Onboarding Flow
 - Two-proportion z-test (one-sided, α = 0.05)
@@ -79,14 +79,14 @@ gamedev-analytics/
 - Install → D1 Active → D7 Active → D30 Active → Payer
 - Absolute counts and conversion rates at each stage
 
-![Funnel](assets/funnel.png)
+![Funnel](/funnel.png)
 
 ### 5 · Session Engagement by Player Class
 - Average session duration and sessions-per-player by character class
 - Session duration is nearly identical across classes (5.55–5.63 min)
 - Paladin and Warrior lead on sessions per player (9.16 and 9.26)
 
-![Sessions](assets/sessions.png)
+![Sessions](/sessions.png)
 
 ---
 
