@@ -150,8 +150,10 @@ jupyter notebook notebooks/shadow_realm_analysis.ipynb
 
 ## Tableau Dashboard
 
-See [`dashboard/tableau_guide.md`](dashboard/tableau_guide.md) for full instructions on building a 4-sheet interactive Tableau Public dashboard from this data.
+See [`dashboard/tableau_guide.md`](https://github.com/fbannayeva/gamedev-analytics/blob/main/tableau_guide.md) for full instructions on building a 4-sheet interactive Tableau Public dashboard from this data.
 
+**Live Dashboard:**
+[View on Tableau Public](https://public.tableau.com/app/profile/fidan.bannayeva/viz/MobileGamePlayerAnalyticsDashboard/Dashboard1?publish=yes)
 ---
 
 ## Author
